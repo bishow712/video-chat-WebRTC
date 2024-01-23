@@ -101,21 +101,31 @@ const Room = () => {
     }, [socket, handleUserJoined, handleIncomingCall, handleCallAccepted, handleNegoNeededIncoming, handleNegoNeededFinal])
 
   return (
-    <div>
-      <h1>Room Page</h1>
-      <h4>{remoteSocketId ? 'Connected' : 'Noone in room'}</h4>
-      {myStream && <button onClick={sendStreams}>Send Stream</button>}
-      {remoteSocketId && <button onClick={handleCallUser}>Call</button>}
-      {myStream && 
-      (<>
-        <h2>My Video</h2>
-        <ReactPlayer playing muted height="100px" width="200px" url={myStream}/>
-      </>)}
-      {remoteStream && 
-      (<>
-        <h2>Remote Video</h2>
-        <ReactPlayer playing muted height="100px" width="200px" url={remoteStream}/>
-      </>)}
+    <div  className="p-8">
+      <h1 className="text-3xl font-bold mb-4 text-center">Welcome to the Room.</h1>
+      <h4 className="text-2xl text-center mb-6">{remoteSocketId ? 'Connected' : 'No-one in the room.'}</h4>
+      <div className='text-center mb-4'>
+        {myStream && <button className="bg-blue-500 text-white px-4 py-2 mx-4 rounded" onClick={sendStreams}>Send Stream</button>}
+        {remoteSocketId && <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleCallUser}>Call</button>}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-center">
+        <div className="mb-4 md:mb-0">
+        {myStream && 
+          (<div className='flex flex-col items-center'>
+            <h2 className="text-lg mb-2">My Video</h2>
+            <ReactPlayer playing muted controls className="rounded-lg" height="100%" width="70%" url={myStream}/>
+          </div>)}
+        </div>
+
+        <div>
+        {remoteStream && 
+          (<div className='flex flex-col items-center'>
+            <h2 className="text-lg mb-2">Remote Video</h2>
+            <ReactPlayer playing muted controls className="rounded-lg" height="100%" width="70%" url={remoteStream}/>
+          </div>)}
+        </div>
+      </div>
     </div>
   )
 }

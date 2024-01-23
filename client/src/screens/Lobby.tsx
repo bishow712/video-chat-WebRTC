@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSocket } from '../context/SocketProvider'
 import { useNavigate } from 'react-router-dom'
+import Room from './Room'
 
 const Lobby: React.FC = () => {
 
@@ -30,17 +31,19 @@ const Lobby: React.FC = () => {
     },[socket, handleJoinRoom])
 
   return (
-    <div>
-      <h1>Lobby</h1>
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-4 text-center">Lobby</h1>
 
       <form action="" onSubmit={handleSubmitForm}>
-        <label htmlFor="email">Email Id</label>
-        <input type="email" name="" id="email" value={email} onChange={e=>setEmail(e.target.value)}/>
-        <br />
-        <label htmlFor="room">Room Number</label>
-        <input type="text" name="" id="room" value={room} onChange={e=>setRoom(e.target.value)}/>
-        <br />
-        <button>Join</button>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-semibold text-gray-600 mb-2">Email Id</label>
+          <input type="email" className="w-full border border-gray-300 p-2" name="" id="email" value={email} placeholder='Enter your email.' onChange={e=>setEmail(e.target.value)}/>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="room" className="block text-sm font-semibold text-gray-600 mb-2">Room Number</label>
+          <input type="text" className="w-full border border-gray-300 p-2" name="" id="room" value={room} placeholder='Enter room number to join.' onChange={e=>setRoom(e.target.value)}/>
+        </div>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded">Join</button>
       </form>
     </div>
   )
